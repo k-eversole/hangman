@@ -1,15 +1,5 @@
-require_relative 'logic'
-
 # Controls the Hangman figure progression
-class Display
-  include Logic
-  attr_accessor :body, :game_lost
-
-  def initialize
-    @body = ['', '', '', '', '', '', '']
-    @game_lost = false
-  end
-
+module Display
   def show_gallows
     puts <<~HEREDOC
    ______
