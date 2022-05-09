@@ -1,37 +1,39 @@
+# frozen_string_literal: true
+
 # Controls the Hangman figure progression
 module Display
   def show_gallows
     puts <<~HEREDOC
-   ______
-  |/     |
-  |      #{body[0]}
-  |     #{body[3]}#{body[1]}#{body[4]}
-  |      #{body[2]}
-  |     #{body[5]} #{body[6]}
-  |
- /|\\
-/ | \\
-^^^^^^^^^^^^^
-    HEREDOC
+       ______
+      |/     |
+      |      #{@body[0]}
+      |     #{@body[3]}#{@body[1]}#{@body[4]}
+      |      #{@body[2]}
+      |     #{@body[5]} #{@body[6]}
+      |
+     /|\\
+    / | \\
+    ^^^^^^^^^^^^^
+          HEREDOC
   end
 
   def draw_body
-    part = body.find_index(&:empty?)
+    part = @body.find_index(&:empty?)
     case part
     when 0
-      body[part] = 'O'
+      @body[part] = 'O'
     when 1
-      body[part] = ' |'
-      body[2] = '|'
+      @body[part] = ' |'
+      @body[2] = '|'
     when 3
-      body[part] = '\\'
-      body[1] = '|'
+      @body[part] = '\\'
+      @body[1] = '|'
     when 4
-      body[part] = '/'
+      @body[part] = '/'
     when 5
-      body[part] = '/'
+      @body[part] = '/'
     when 6
-      body[part] = '\\'
+      @body[part] = '\\'
       self.game_lost = true
     end
   end
