@@ -38,9 +38,7 @@ class Game
     words = []
     dictionary.each do |e|
       n = e.chomp
-      if n.length.between?(5, 13)
-        words << n
-      end
+      words << n if n.length.between?(5, 13)
     end
     dictionary.close
     words.sample
@@ -49,14 +47,15 @@ class Game
   def game_select
     puts "\nDo you want to start a new game (1) or load a saved game (2)?"
     while (input = gets.chomp)
-      if input == '1'
+      case input
+      when '1'
         game = Game.new
         game.play_game
-        break
-      elsif input == '2'
+      when '2'
         load_game
-        break
-      else puts "\nThat is not a valid input.\nDo you want to start a new game (1) or load a saved game (2)?"
+      else
+        puts "\nThat is not a valid input.".red
+        puts "\nDo you want to start a new game (1) or load a saved game (2)?"
       end
     end
   end
@@ -78,12 +77,12 @@ class Game
 
   def player_input
     while (input = gets.chomp.downcase)
-      save_game if input.downcase == "save"
+      save_game if input.downcase == 'save'
       return input if valid_input?(input)
 
       if @wrong_guesses.include?(input) || @dash_display.include?(input)
         puts "\nYou\'ve already guessed that letter. Try a different one."
-      else puts "\nThat is not a valid input. Please enter a letter."
+      else puts "\nThat is not a valid input. Please enter a letter.".red
       end
     end
   end
@@ -103,10 +102,10 @@ class Game
         correct_letter = true
       end
     end
-    if correct_letter == false
-      draw_body
-      @wrong_guesses << guess
-    end
+    return unless correct_letter == false
+
+    draw_body
+    @wrong_guesses << guess
   end
 
   def game_over?

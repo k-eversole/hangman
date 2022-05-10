@@ -4,17 +4,17 @@
 module Display
   def show_gallows
     puts <<~HEREDOC
-       ______
-      |/     |
-      |      #{@body[0]}
-      |     #{@body[3]}#{@body[1]}#{@body[4]}
-      |      #{@body[2]}
-      |     #{@body[5]} #{@body[6]}
-      |
-     /|\\
-    / | \\
-    ^^^^^^^^^^^^^
-          HEREDOC
+         ______
+        |/     |
+        |      #{@body[0]}
+        |     #{@body[3]}#{@body[1]}#{@body[4]}
+        |      #{@body[2]}
+        |     #{@body[5]} #{@body[6]}
+        |
+       /|\\
+      / | \\
+      ^^^^^^^^^^^^^
+    HEREDOC
   end
 
   def draw_body
